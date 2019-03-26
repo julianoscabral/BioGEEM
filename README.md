@@ -7,3 +7,5 @@ Cabral, J.S., Wiegand, K., & Kreft, H. (submitted a). Interactions between ecolo
 Cabral, J. S., Wiegand, K., Whittaker, R. J. & Kreft, H. (submitted b). Assessing predicted isolation effects from the general dynamic model of island biogeography with an eco-evolutionary model for plants. Journal of Biogeography, xxxxxxx.
 
 The code has been written in C++ and compiled with Visual Studio C++ 2010 and 2015. The code integrates beyond the processes presented in the references above: disturbances, climate change, species invasion, temperature feedbacks, habitat degration in lowlands. 
+
+For further information, support and project ideas, contact Juliano Sarmento Cabral: juliano.sarmento_cabral@uni-wuerburg.de
