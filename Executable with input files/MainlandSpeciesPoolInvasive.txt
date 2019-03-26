@@ -1,0 +1,2 @@
+Fenology	Rmax	M	Gamma	GenTime	MutRate	alpha	P	Kpftfactor	randomTrend	islandSide	Growth	Mrecruit	Germ	Mseed	Annual	Mass	Lineage	MotherspID	optimalAltitude	MassSeedling	MassSeed	KpftfactorSeedling	generalist	verticalgeneralist	speciesType	yearOfSpec
+20613	0.377279	0.0132048	-0.579	0.969	1.2576e-015	0.03701	0.57	0.897293	0.64	1	0.0132766	0.0132766	0.246123	0.246123	0	8.7e+006	0	0	6	1.74e+006	0.0495303	0.224323	3	4	0	0

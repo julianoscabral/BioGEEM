@@ -1,0 +1,154 @@
+#--- Simulation type ---#
+# if there's more than one type of simulation, just one implemented
+simulationType = Default
+
+#--- General Simulation parameters---#
+#Number of replicates with the same species pool:
+Replicates = 3
+#Number of eco-evolutionary time steps:
+SimulationTimesteps = 2210001
+#Number of environmental time steps (only for islands relevant; if > SimulationTimesteps => no environmental dynamics):
+IslandTimestep = 130000
+#Spatial dimension of focus landscape:
+MaxIslandRadius = 5
+#Spatial dimension of dispersal kernel:
+KernelRadius = 309
+#Number of species migrating from mainland per time step:
+MigrationEvents = 10
+#Number of species in the mailand or source pool:
+MainlandSpeciesNumber = 1000 
+InvasiveSpeciesNumber = 1 
+#Maximum grid cell area (in m2):
+MaxK = 1000000
+#Frequency in tiem steps for recording output per species:
+SpeciesOutputtimestep = 100
+#Timestep to begin recording species abundance distribution:
+SpeciesAbundDistriBegin = 3790
+#Dispersal kernel = NegExp (negative exponencial) or = 2Dt (Clark's 2Dt)
+DispersalKernel = 2Dt
+#Percentual of each life form on mainland/source pool:
+PFTtree = 0.334
+PFTshrub = 0.333
+PFTherb = 0.333
+#Catastrophic random disturbance regimes (for each grid cell): 0= no disturbance; 1= apply disturbance; 
+RandomDisturbance = 0
+#Intensity of disturbance (probability of individual mortality); 
+DisturbanceProb = 0.0
+#Applying vulcanic disturbance (for growth environmental steps in island simulation); = 0 (no disturbance, default) or = 1 (kill random percent of individuals, not used) 
+VulcanicDisturbance =0
+#Whether the simulation assumes random parameter combinations or Allometric/Metabolic relationships:
+# = 0: random parameters taken from the interval files (no metabolic tradeoffs) => uses the localdynamicsNoMTE function  
+# = 1: apply allometric/metabolic rates => uses the localdynamics function  
+#OBS: If Allometabolic == 0, do not use ReadMainlandSpeciespool = read
+Allometabolic = 1
+#Lowland temperature - at altitude 1: 25 C = 298.15
+Temperature = 298.15
+#Boltzmann constant (for MTE equations)
+Boltzmann = 0.0000862
+#Activation energy (for MTE equations)
+E = 0.63
+#Altitude/Elevation preference: it will give a diameter to give a maximum random tolerance of each species around the optimum temperature elevation
+Verticalpreference = 7
+#Interval to draw random optimal temperature elevations: 
+#Max and min optimal temperature related to the lowland level. Max is the intentional max + the min for the random function purpose.
+MaxOptaltitude = 16
+MinOptaltitude = 1
+
+#--- Further scenario parameter---#
+#Read species from a given mainland: 
+# = read: it will read a file called 'MainlandSpeciesPoolRead'
+# = noread: it createe a new mainland source pool (with can be used in other simulation experiments)
+ReadMainlandSpeciespool = noread
+#For varying long-distance dispersal (LDD) ability of the entire pool:
+# default should be 0; 
+# if value is between 0 and 1: value to SUBTRACT from the dispersal parameter p of the all species in the source pool (turning the oerall LDD ability higher!)
+LDD = 0 
+#Files with parameter ranges for each life form (check file to see necessary info):
+# = All: considers trees, shrubs, herbs (important for reading the respective input files); 
+# = One (one parameter range -> it will read only the file for Trees)
+SimulatedPFT = All
+#Simulate feedback of tree cover to the temperature (niche construction): 
+# = without : default, no temperature feedback
+# = with : it simulates temperature decrease with forest cover; only implemeted for Allometabolic ==1, localdynamics
+TreeTemperatureFeedback = without
+#For the initialization submodel:
+# = forest : initialize a forest in the first time step
+# = island : colonize a bare island every time step form a mainland
+Colonize = island
+#Habitat suitability = Random (but autocorrelated) or = Concentric (but autocorrelated, for island and mountain simulations) or = Plane (forest or sloped planes simulations)
+HabitatSuitability = Concentric
+#Recalculating habitat suitability (only important for concentric landscapes): 
+# = yes : because of island's dynamics, it is necessary to re calculate matrix H; 
+# = no : for static scenarios, like mountains, or static islands, but necessary to calculate heretogeneous H). If no, give the radius to be considered:
+DynamicGeology = yes
+#For DynamicGeology == No, specify the radius of the static landscape:
+MountainRadius = 4
+#Simulating single species or communities: 
+# = false : simulates entire source pool (default)
+# = true : it takes one species of the pool per simulation run 
+SingleSpecies = false
+#Fixing metabolic rates for a given temperature or altitude (given below): 
+# = none : default, no metabolic transition is fixed (assuming no metabolic influence of temperature) = this means metabolic rates varying with local temperatures)
+# = brmax : fixing only reproduction; = bm : fixing only mortality; = bge : fixing only germination; = bgr : fixing only growth; 
+# = brmax&bm : fixing only reproduction AND mortality; 
+# = all : all rates 
+MetabolicRateToCorrect = none
+#If fixing any metabolic rate, give the temperature to fix metabolic rates at:
+TempForFixedMetabolism = 298.15
+#Boundaries rules: 
+# = absorbing (default)
+# = periodic (only implemeted for Allometabolic ==1, localdynamics). Periodic boundaries must be switched on IN THE CODE (together with incomingDispersalUnits matrix and commenting out armadillo skript)!!
+Boundaries = absorbing
+#Turning speciation on or off:
+CladoSpeciation = on
+AnaSpeciation = on
+#level of niche evolution:
+NicheEvolution = 0.25
+#Temperature variation with altitude: on or off => For planes: State matrix gives the altitude. For islands: if on, island dynamics have temperature increased (but not the State matrix)
+AltitudinalTemp = on
+#Island increasing only in SIZE and NOT changing Altitude (Yes/no) (for calculating habitat suitability): (no meaning for forest/plane simus, becuase the altitude can be set in the input map)
+FixedIslandaltitude = no
+#Adding a tree line rule: 
+# = off : default, no tree line
+# = on : trees cannot growth in temperature < 6 C (only for Allometabolic =1, localdynamics)
+Treeline = off
+#Include an invasive species pool: number indicates what time step it should be simulated:
+# 0 = no invasive
+InvasivesBegin = 0
+# Number of invasive per time (it works as a second source pool)
+InvasivesperTimestep = 1
+#Number of coordinates for invasion entry grid cells
+RandomInvasivecenters = 1
+#Turning climate change on: just give a positive number indicating the timestep of simulation for the onset of climate change (0= no climate change)
+ClimateChange = 0
+#Changing the temperature: can be positive or negative (change in temperature per time step in degrees)
+TemperatureChange = 0
+#Give the period for which temperature change is going to occur in a rate TemperatureChange/TemperatureChangeInterval per time step during TemperatureChangeInterval steps
+TemperatureChangeInterval = 0
+#Simulating habitat loss (decrease in local maxK) in the lowlands (only for islands/mountains)
+# = 0 : no degradation (default); 
+# =  positive number : implementation step; degradation zone: from level 0 to level (r-1)/2 [if r is odd] or r/2 [if r is even]
+LowlandDegradation = 0
+#If simulating lowland habitat loss, give the maximum impact of degradation in percent of maxK: random degradation up to the given value. 
+DegradationImpact = 100
+#Making specialists going extinct in island dynamics: #TOCHECK
+VulnerableSpecialists = yes
+
+
+#--- input Files for initialization---#
+#File with dispersal kernel (check file to see necessary info):
+dispersalFile = TestDisp.txt
+#File with landscape (check file to see necessary info):
+mapFile = 11kmD300KmdIsland.txt
+#Files with parameter ranges for each life form (check file to see necessary info):
+#In the following files, The allometric constant associate with K means a coefficent to which the maxK (maximum carrying capacity) is scaled to the cell area: 
+#a value = 0.3 gives a cell area of 1000000 m2 (for a maxK of 1000000); 
+#a value = 0.012 gives a cell size of 40000 m2 (for a maxK of 40000) [if this is used, change in the maxK in the General parameters above]
+parameterRangesTree = TreeParameterRanges.txt 
+parameterRangesShrub = ShrubParameterRanges.txt
+parameterRangesHerb = HerbParameterRanges.txt
+
+
+#----For OutputFile names----#
+#ID for simulation run to appear in the output file names:
+SimuSpecifications = Test
